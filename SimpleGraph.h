@@ -16,11 +16,13 @@ public:
     void drawMultipleLineGraphs(int* dataX[], int* dataY[], int dataSize[], int numLines);
     void drawBarGraph(int data[], int dataSize, int barWidth);
     void drawPieChart(int data[], int dataSize);
+    void autoResizeAxes(int dataX[], int dataY[], int dataSize);
 
 private:
     U8G2 &u8g2;
     int regionX, regionY, regionWidth, regionHeight;
     int rows, cols, currentIndex;
+    int minX, maxX, minY, maxY;
     int mapX(int x);
     int mapY(int y);
 };
