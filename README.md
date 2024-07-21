@@ -1,5 +1,3 @@
-# SimpleGraphArduino
-SSD1309 oled display plotting library
 # SimpleGraph Library
 
 La biblioteca `SimpleGraph` permite dibujar gráficos básicos en una pantalla OLED SSD1309 usando Arduino. Esta biblioteca incluye funcionalidades para gráficos de dispersión, gráficos de líneas, gráficos de barras y gráficos circulares.
@@ -161,6 +159,58 @@ void setup() {
 void loop() {
   u8g2.clearBuffer();
   
+  int pieData[] = {10, 20, 30, 40};
+  int pieSize = sizeof(pieData) / sizeof(pieData[0]);
+  graph.drawPieChart(pieData, pieSize);
+
+  u8g2.sendBuffer();
+  
+  delay(1000);  // Espera un segundo antes de actualizar la pantalla
+}
+```
+
+### Ejemplo 6: Dibujar gráficos en subplots
+
+```cpp
+#include <U8g2lib.h>
+#include "SimpleGraph.h"
+
+// Configura la pantalla para I2C
+U8G2_SSD1309_128X64_NONAME0_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
+SimpleGraph graph(u8g2);
+
+void setup() {
+  u8g2.begin();
+}
+
+void loop() {
+  u8g2.clearBuffer();
+
+  // Región 1: Gráfico de dispersión
+  graph.setSubplot(2, 2, 0);
+  graph.drawAxes();
+  int dataX1[] = {0, 10, 20, 30, 40, 50, 60};
+  int dataY1[] = {0, 10, 5, 20, 10, 30, 15};
+  int dataSize1 = sizeof(dataX1) / sizeof(dataX1[0]);
+  graph.drawScatterPlot(dataX1, dataY1, dataSize1);
+
+  // Región 2: Gráfico de líneas
+  graph.setSubplot(2, 2, 1);
+  graph.drawAxes();
+  int dataX2[] = {0, 10, 20, 30, 40, 50, 60};
+  int dataY2[] = {5, 15, 10, 25, 15, 35, 20};
+  int dataSize2 = sizeof(dataX2) / sizeof(dataX2[0]);
+  graph.drawLineGraph(dataX2, dataY2, dataSize2);
+
+  // Región 3: Gráfico de barras
+  graph.setSubplot(2, 2, 2);
+  graph.drawAxes();
+  int barData[] = {10, 20, 30, 20, 10, 15};
+  int barSize = sizeof(barData) / sizeof(barData[0]);
+  graph.drawBarGraph(barData, barSize, 8);
+
+  // Región 4: Gráfico circular
+  graph.setSubplot(2, 2, 3);
   int pieData[] = {10, 20, 30, 40};
   int pieSize = sizeof(pieData) / sizeof(pieData[0]);
   graph.drawPieChart(pieData, pieSize);
