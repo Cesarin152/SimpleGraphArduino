@@ -215,6 +215,20 @@ void loop() {
   int pieSize = sizeof(pieData) / sizeof(pieData[0]);
   graph.drawPieChart(pieData, pieSize);
 
+## Contribuciones
+
+Las contribuciones son bienvenidas. Para contribuir, por favor sigue estos pasos:
+
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agregar nueva funcionalidad'`).
+4. Sube tus cambios a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
+
+## Licencia
+
+Este proyecto está licenciado bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
   u8g2.sendBuffer();
   
   delay(1000);  // Espera un segundo antes de actualizar la pantalla
